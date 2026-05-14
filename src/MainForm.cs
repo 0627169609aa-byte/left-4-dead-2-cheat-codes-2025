@@ -10,68 +10,80 @@ namespace L4D2CheatApp
     public partial class MainForm : Form
     {
         private const string GameProcessName = "left4dead2";
-        private Timer processCheckTimer;
-        private bool isGameRunning = false;
+        private Process _gameProcess;
+        private Timer _processDetectionTimer;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeProcessCheckTimer();
+            InitializeProcessDetection();
         }
 
         private void InitializeComponent()
         {
-            this.Text = "Left 4 Dead 2 Cheat";
-            this.Size = new System.Drawing.Size(400, 300);
+            this.Text = "Left 4 Dead 2 Cheat App";
+            this.ClientSize = new System.Drawing.Size(300, 200);
 
-            Button cheatButton = new Button() { Text = "Activate Cheat", Dock = DockStyle.Fill };
-            cheatButton.Click += CheatButton_Click;
-
-            this.Controls.Add(cheatButton);
-        }
-
-        private void InitializeProcessCheckTimer()
-        {
-            processCheckTimer = new Timer();
-            processCheckTimer.Interval = 1000; // Check every second
-            processCheckTimer.Tick += ProcessCheckTimer_Tick;
-            processCheckTimer.Start();
-        }
-
-        private void ProcessCheckTimer_Tick(object sender, EventArgs e)
-        {
-            isGameRunning = Process.GetProcessesByName(GameProcessName).Any();
-            UpdateUIForGameStatus();
-        }
-
-        private void UpdateUIForGameStatus()
-        {
-            if (isGameRunning)
+            Button btnActivateCheat = new Button
             {
-                this.Text = "Left 4 Dead 2 Cheat - Game Running";
+                Text = "Activate Cheat",
+                Location = new System.Drawing.Point(50, 50),
+                Size = new System.Drawing.Size(200, 30)
+            };
+            btnActivateCheat.Click += BtnActivateCheat_Click;
+
+            Button btnDeactivateCheat = new Button
+            {
+                Text = "Deactivate Cheat",
+                Location = new System.Drawing.Point(50, 100),
+                Size = new System.Drawing.Size(200, 30)
+            };
+            btnDeactivateCheat.Click += BtnDeactivateCheat_Click;
+
+            this.Controls.Add(btnActivateCheat);
+            this.Controls.Add(btnDeactivateCheat);
+        }
+
+        private void InitializeProcessDetection()
+        {
+            _processDetectionTimer = new Timer
+            {
+                Interval = 1000 // Check every second
+            };
+            _processDetectionTimer.Tick += ProcessDetectionTimer_Tick;
+            _processDetectionTimer.Start();
+        }
+
+        private void ProcessDetectionTimer_Tick(object sender, EventArgs e)
+        {
+            _gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
+            if (_gameProcess == null)
+            {
+                MessageBox.Show("Left 4 Dead 2 is not running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Enabled = false; // Disable the cheat buttons if game is not running
             }
             else
             {
-                this.Text = "Left 4 Dead 2 Cheat - Game Not Running";
+                this.Enabled = true; // Enable the cheat buttons if game is running
             }
         }
 
-        private void CheatButton_Click(object sender, EventArgs e)
+        private void BtnActivateCheat_Click(object sender, EventArgs e)
         {
-            if (!isGameRunning)
+            if (_gameProcess != null)
             {
-                MessageBox.Show("The game must be running to activate cheats!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                // Code to activate cheat (placeholder)
+                MessageBox.Show("Cheat activated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            // Placeholder for cheat activation logic
-            MessageBox.Show("Cheat Activated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        
-        protected override void OnFormClosing(FormClosingEventArgs e)
+
+        private void BtnDeactivateCheat_Click(object sender, EventArgs e)
         {
-            processCheckTimer.Stop();
-            base.OnFormClosing(e);
+            if (_gameProcess != null)
+            {
+                // Code to deactivate cheat (placeholder)
+                MessageBox.Show("Cheat deactivated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
