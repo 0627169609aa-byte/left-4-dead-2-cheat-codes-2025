@@ -1,15 +1,17 @@
 ```csharp
 using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace L4D2CheatApp
 {
     public partial class MainForm : Form
     {
-        private const string GameProcessName = "left4dead2"; // Game executable name
+        private const string GameProcessName = "left4dead2";
         private Timer processCheckTimer;
-        private bool isGameRunning;
+        private bool isGameRunning = false;
 
         public MainForm()
         {
@@ -20,21 +22,12 @@ namespace L4D2CheatApp
         private void InitializeComponent()
         {
             this.Text = "Left 4 Dead 2 Cheat";
-            this.Width = 300;
-            this.Height = 200;
+            this.Size = new System.Drawing.Size(400, 300);
 
-            Button toggleCheatButton = new Button();
-            toggleCheatButton.Text = "Toggle Cheat";
-            toggleCheatButton.Location = new System.Drawing.Point(50, 50);
-            toggleCheatButton.Click += ToggleCheatButton_Click;
+            Button cheatButton = new Button() { Text = "Activate Cheat", Dock = DockStyle.Fill };
+            cheatButton.Click += CheatButton_Click;
 
-            Button exitButton = new Button();
-            exitButton.Text = "Exit";
-            exitButton.Location = new System.Drawing.Point(50, 100);
-            exitButton.Click += ExitButton_Click;
-
-            this.Controls.Add(toggleCheatButton);
-            this.Controls.Add(exitButton);
+            this.Controls.Add(cheatButton);
         }
 
         private void InitializeProcessCheckTimer()
@@ -47,35 +40,38 @@ namespace L4D2CheatApp
 
         private void ProcessCheckTimer_Tick(object sender, EventArgs e)
         {
-            isGameRunning = Process.GetProcessesByName(GameProcessName).Length > 0;
+            isGameRunning = Process.GetProcessesByName(GameProcessName).Any();
+            UpdateUIForGameStatus();
+        }
+
+        private void UpdateUIForGameStatus()
+        {
             if (isGameRunning)
             {
-                // Game is running, additional logic can be added here
+                this.Text = "Left 4 Dead 2 Cheat - Game Running";
             }
             else
             {
-                // Game is not running, additional logic can be added here
-                MessageBox.Show("Left 4 Dead 2 is not running!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Text = "Left 4 Dead 2 Cheat - Game Not Running";
             }
         }
 
-        private void ToggleCheatButton_Click(object sender, EventArgs e)
+        private void CheatButton_Click(object sender, EventArgs e)
         {
             if (!isGameRunning)
             {
-                MessageBox.Show("Please start Left 4 Dead 2 first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("The game must be running to activate cheats!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Logic to toggle cheat feature goes here...
-            MessageBox.Show("Cheat toggled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Placeholder for cheat activation logic
+            MessageBox.Show("Cheat Activated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void ExitButton_Click(object sender, EventArgs e)
+        
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
             processCheckTimer.Stop();
-            processCheckTimer.Dispose();
-            this.Close();
+            base.OnFormClosing(e);
         }
     }
 }
