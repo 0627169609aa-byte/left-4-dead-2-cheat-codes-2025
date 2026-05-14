@@ -1,52 +1,49 @@
 ```markdown
 # CHANGELOG.md
 
-## [v2.4.1] - 2023-10-10
+## [Unreleased]
+
+## [v2.4.1] - 2023-10-15
 ### Added
-- **Mutation Selector**: Introduced a new option to toggle between various mutations (Realism Versus, Scavenge, etc.) for a more tailored gaming experience.
-- **Admin Controls**: Added functionality for server administrators to enable/disable cheats using a simple toggle interface.
+- New feature: **Custom Weapon Loadouts** - Players can now create and save their own weapon loadouts for easy access.
+- Integrated **Versus Mode Helper** - Improved UI for automating common tasks in Versus mode, reducing the need for manual input.
+
+### Changed
+- Updated the **Infected Spawner Mod** to support additional spawn options, allowing for more strategic gameplay.
+- Tweaked the user interface for better accessibility and responsiveness.
+- Minor updates to cheat toggles, enhancing performance during gameplay.
 
 ### Fixed
-- Resolved issue with the **No Clip** feature where it occasionally failed to activate in certain game modes.
-- Fixed a bug in the **Infinite Ammo** cheat that caused crashes during multiplayer games.
+- Resolved an issue where the **Melee Weapon Unlock** cheat was not functioning correctly in campaign mode.
+- Fixed a bug causing the app to crash when launching zombies with specific configurations.
 
-### Improved
-- Enhanced the user interface for easier navigation through available cheats.
-- Optimized performance to reduce lag when using cheats on lower-spec systems.
-
----
-
-## [v2.3.0] - 2023-05-15
+## [v2.3.0] - 2023-07-12
 ### Added
-- **Weapon Unlocker**: Players can now instantly unlock all weapons and attachments for their characters.
-- **Achievement Unlock Shortcut**: Implemented a one-click solution to unlock all achievements.
+- Introduced **Advanced Configurator** - Users can now adjust more in-depth settings for their cheats, including cooldown times and behavior patterns.
+- Support for **Mutation Mode Cheats** - Added unique cheats specifically tailored for custom mutations.
+
+### Changed
+- Improved the **Aim Assist** feature to provide smoother adjustments while aiming, especially for sniper weapons.
+- Redesigned the layout of the main dashboard for quicker access to all cheat functionalities.
 
 ### Fixed
-- Addressed an issue where the **God Mode** would occasionally revert to normal health after respawning.
-- Fixed graphical glitches that appeared when using the **Third-Person View** option.
+- Corrected an issue with the **Infinite Ammo** cheat that was sometimes not applying correctly in multiplayer sessions.
+- Fixed several minor bugs related to hotkey bindings.
 
-### Improved
-- Improved compatibility with the latest game update for Left 4 Dead 2.
-- Streamlined the settings menu layout for better accessibility.
-
----
-
-## [v2.1.0] - 2023-02-03
+## [v2.1.0] - 2023-04-01
 ### Added
-- **Custom Game Modes**: Introduced the ability to create and save custom game modes with specific cheat configurations.
-- **Expanded Cheat List**: Added new cheats for enhancing the gameplay experience, including **Super Speed** and **Zombie Awareness Toggle**.
+- New cheat: **Instant Reload** - Players can now reload every weapon instantly, improving combat efficiency.
+- Added the ability to toggle **No Clip Mode** for exploration without restrictions in custom maps.
+
+### Changed
+- Revamped the **Zombies Health Adjuster** for improved performance certainty, ensuring the proper application of health modifications.
+- Made improvements to the overall app performance, reducing loading times and enhancing responsiveness.
 
 ### Fixed
-- Corrected the display error where some cheats did not show the correct key bindings.
-- Fixed an issue where the **Zombie Countdown** timer was not accurately reflecting time remaining.
+- Resolved problems with the **One-Hit Kill** function that were affecting player accuracy in certain scenarios.
+- Fixed UI glitches on the weapon selection screen during rapid toggle.
 
-### Improved
-- Enhanced logging capabilities to ensure users receive feedback when cheats are activated or deactivated.
-- Updated the app’s help section with more detailed descriptions of each cheat.
-
----
-
-## [v2.0.0] - 2022-11-20
+## [v2.0.0] - 2023-01-15
 ### Added
-- Initial release of the Left 4 Dead 2 cheat app featuring a comprehensive range of cheats for both single-player and multiplayer modes.
-- Key features include **Unlimited Health**, **Unlimited Ammo**, and **Spawn
+- Initial release with core features including:
+  - **God Mode** for
