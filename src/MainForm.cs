@@ -1,57 +1,43 @@
 ```csharp
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace L4D2CheatApp
 {
     public partial class MainForm : Form
     {
-        private const string GameProcessName = "left4dead2";
+        private const string GameProcessName = "left4dead2"; // Game executable name
         private Timer processCheckTimer;
         private bool isGameRunning;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeTimer();
+            InitializeProcessCheckTimer();
         }
 
         private void InitializeComponent()
         {
-            this.StartButton = new System.Windows.Forms.Button();
-            this.StopButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            this.Text = "Left 4 Dead 2 Cheat";
+            this.Width = 300;
+            this.Height = 200;
 
-            // StartButton
-            this.StartButton.Location = new System.Drawing.Point(30, 30);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(75, 23);
-            this.StartButton.TabIndex = 0;
-            this.StartButton.Text = "Start Cheat";
-            this.StartButton.UseVisualStyleBackColor = true;
-            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            Button toggleCheatButton = new Button();
+            toggleCheatButton.Text = "Toggle Cheat";
+            toggleCheatButton.Location = new System.Drawing.Point(50, 50);
+            toggleCheatButton.Click += ToggleCheatButton_Click;
 
-            // StopButton
-            this.StopButton.Location = new System.Drawing.Point(120, 30);
-            this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(75, 23);
-            this.StopButton.TabIndex = 1;
-            this.StopButton.Text = "Stop Cheat";
-            this.StopButton.UseVisualStyleBackColor = true;
-            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            Button exitButton = new Button();
+            exitButton.Text = "Exit";
+            exitButton.Location = new System.Drawing.Point(50, 100);
+            exitButton.Click += ExitButton_Click;
 
-            // MainForm
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.StartButton);
-            this.Controls.Add(this.StopButton);
-            this.Name = "MainForm";
-            this.Text = "L4D2 CheatApp";
-            this.ResumeLayout(false);
+            this.Controls.Add(toggleCheatButton);
+            this.Controls.Add(exitButton);
         }
 
-        private void InitializeTimer()
+        private void InitializeProcessCheckTimer()
         {
             processCheckTimer = new Timer();
             processCheckTimer.Interval = 1000; // Check every second
@@ -62,29 +48,35 @@ namespace L4D2CheatApp
         private void ProcessCheckTimer_Tick(object sender, EventArgs e)
         {
             isGameRunning = Process.GetProcessesByName(GameProcessName).Length > 0;
-        }
-
-        private void StartButton_Click(object sender, EventArgs e)
-        {
             if (isGameRunning)
             {
-                // Logic to start cheat
-                MessageBox.Show("Cheat activated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Game is running, additional logic can be added here
             }
             else
             {
-                MessageBox.Show("Left 4 Dead 2 is not running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Game is not running, additional logic can be added here
+                MessageBox.Show("Left 4 Dead 2 is not running!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void StopButton_Click(object sender, EventArgs e)
+        private void ToggleCheatButton_Click(object sender, EventArgs e)
         {
-            // Logic to stop cheat
-            MessageBox.Show("Cheat deactivated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (!isGameRunning)
+            {
+                MessageBox.Show("Please start Left 4 Dead 2 first!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Logic to toggle cheat feature goes here...
+            MessageBox.Show("Cheat toggled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private System.Windows.Forms.Button StartButton;
-        private System.Windows.Forms.Button StopButton;
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            processCheckTimer.Stop();
+            processCheckTimer.Dispose();
+            this.Close();
+        }
     }
 }
 ```
