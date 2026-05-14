@@ -4,13 +4,13 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace L4D2CheatApp
+namespace L4DCheatApp
 {
     public partial class MainForm : Form
     {
-        private const string GameProcessName = "left4dead2";
-        private Process gameProcess;
         private Timer processCheckTimer;
+        private const string targetProcessName = "left4dead2";
+        private bool isGameRunning = false;
 
         public MainForm()
         {
@@ -21,74 +21,78 @@ namespace L4D2CheatApp
         private void InitializeCustomComponents()
         {
             processCheckTimer = new Timer();
-            processCheckTimer.Interval = 2000; // Check every 2 seconds
-            processCheckTimer.Tick += ProcessCheckTimer_Tick;
+            processCheckTimer.Interval = 1000; // Check every second
+            processCheckTimer.Tick += new EventHandler(ProcessCheckTimer_Tick);
             processCheckTimer.Start();
-            CheckForGameProcess();
         }
 
         private void ProcessCheckTimer_Tick(object sender, EventArgs e)
         {
-            CheckForGameProcess();
+            isGameRunning = IsProcessRunning(targetProcessName);
+            updateUI();
         }
 
-        private void CheckForGameProcess()
+        private void updateUI()
         {
-            gameProcess = Process.GetProcessesByName(GameProcessName).Length > 0 ? 
-                          Process.GetProcessesByName(GameProcessName)[0] : null;
-
-            if (gameProcess != null)
+            if (isGameRunning)
             {
-                lblStatus.Text = "Game is running";
-                btnEnableCheat.Enabled = true;
+                lblStatus.Text = "Game is running.";
+                btnCheat.Enabled = true;
             }
             else
             {
-                lblStatus.Text = "Game is not running";
-                btnEnableCheat.Enabled = false;
+                lblStatus.Text = "Game is not running.";
+                btnCheat.Enabled = false;
             }
         }
 
-        private void btnEnableCheat_Click(object sender, EventArgs e)
+        private bool IsProcessRunning(string processName)
         {
-            if (gameProcess != null)
-            {
-                // Code to enable cheat (implement your cheat logic here)
-                MessageBox.Show("Cheat enabled for Left 4 Dead 2!");
-            }
+            Process[] processes = Process.GetProcessesByName(processName);
+            return processes.Length > 0;
         }
 
-        private void btnDisableCheat_Click(object sender, EventArgs e)
+        private void btnCheat_Click(object sender, EventArgs e)
         {
-            if (gameProcess != null)
-            {
-                // Code to disable cheat (implement your cheat logic here)
-                MessageBox.Show("Cheat disabled.");
-            }
+            // Call your cheat functions here
+            MessageBox.Show("Cheat activated!", "Cheat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            processCheckTimer.Stop();
+            processCheckTimer.Dispose();
         }
 
         private void InitializeComponent()
         {
-            this.btnEnableCheat = new System.Windows.Forms.Button();
-            this.btnDisableCheat = new System.Windows.Forms.Button();
+            this.btnCheat = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnEnableCheat
+            // btnCheat
             // 
-            this.btnEnableCheat.Location = new System.Drawing.Point(12, 12);
-            this.btnEnableCheat.Name = "btnEnableCheat";
-            this.btnEnableCheat.Size = new System.Drawing.Size(120, 23);
-            this.btnEnableCheat.TabIndex = 0;
-            this.btnEnableCheat.Text = "Enable Cheat";
-            this.btnEnableCheat.UseVisualStyleBackColor = true;
-            this.btnEnableCheat.Click += new System.EventHandler(this.btnEnableCheat_Click);
+            this.btnCheat.Location = new System.Drawing.Point(100, 50);
+            this.btnCheat.Name = "btnCheat";
+            this.btnCheat.Size = new System.Drawing.Size(100, 30);
+            this.btnCheat.TabIndex = 1;
+            this.btnCheat.Text = "Activate Cheat";
+            this.btnCheat.UseVisualStyleBackColor = true;
+            this.btnCheat.Click += new System.EventHandler(this.btnCheat_Click);
             // 
-            // btnDisableCheat
+            // lblStatus
             // 
-            this.btnDisableCheat.Location = new System.Drawing.Point(12, 41);
-            this.btnDisableCheat.Name = "btnDisableCheat";
-            this.btnDisableCheat.Size = new System.Drawing.Size(120, 23);
-            this.btnDisableCheat.TabIndex = 1;
-            this.btnDisableCheat.Text = "Disable Cheat";
-            this.btn
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(97, 20);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 13);
+            this.lblStatus.TabIndex = 2;
+            // 
+            // MainForm
+            // 
+            this.ClientSize = new System.Drawing.Size(300, 150);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.btnCheat);
+            this.Name = "MainForm";
+            this.Text = "Left 4 Dead 2 Cheat App";
+            this.FormClosing += new System
