@@ -3,86 +3,78 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Timers;
 using System.Windows.Forms;
 
-namespace L4D2CheatApp
+namespace L4DCheatApp
 {
     public partial class MainForm : Form
     {
         private const string GameProcessName = "left4dead2";
-        private Process gameProcess;
+        private const int TimerInterval = 1000; // 1 second
         private Timer processCheckTimer;
+        private Process gameProcess;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeTimer();
+            InitializeProcessCheckTimer();
         }
 
         private void InitializeComponent()
         {
-            this.Text = "Left 4 Dead 2 Cheat";
-            this.ClientSize = new System.Drawing.Size(300, 200);
+            this.Text = "Left 4 Dead 2 Cheat App";
+            this.Size = new System.Drawing.Size(400, 300);
+            Button attachButton = new Button() { Text = "Attach to Game", Location = new System.Drawing.Point(50, 50) };
+            attachButton.Click += AttachButton_Click;
 
-            Button toggleCheatButton = new Button();
-            toggleCheatButton.Text = "Toggle Cheat";
-            toggleCheatButton.Click += ToggleCheatButton_Click;
-            toggleCheatButton.Location = new System.Drawing.Point(50, 50);
-            this.Controls.Add(toggleCheatButton);
+            Button someCheatButton = new Button() { Text = "Enable Cheat", Location = new System.Drawing.Point(50, 100) };
+            someCheatButton.Click += SomeCheatButton_Click;
 
-            Button exitButton = new Button();
-            exitButton.Text = "Exit";
-            exitButton.Click += ExitButton_Click;
-            exitButton.Location = new System.Drawing.Point(50, 100);
-            this.Controls.Add(exitButton);
-
-            this.FormClosing += MainForm_FormClosing;
+            this.Controls.Add(attachButton);
+            this.Controls.Add(someCheatButton);
         }
 
-        private void InitializeTimer()
+        private void InitializeProcessCheckTimer()
         {
-            processCheckTimer = new Timer(2000); // Check every 2 seconds
-            processCheckTimer.Elapsed += CheckGameProcess;
-            processCheckTimer.AutoReset = true;
-            processCheckTimer.Enabled = true;
+            processCheckTimer = new Timer();
+            processCheckTimer.Interval = TimerInterval;
+            processCheckTimer.Tick += ProcessCheckTimer_Tick;
+            processCheckTimer.Start();
         }
 
-        private void CheckGameProcess(object sender, ElapsedEventArgs e)
+        private void ProcessCheckTimer_Tick(object sender, EventArgs e)
         {
             gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
-
             if (gameProcess == null)
             {
-                MessageBox.Show("Game is not running!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Game not running!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 processCheckTimer.Stop();
             }
         }
 
-        private void ToggleCheatButton_Click(object sender, EventArgs e)
+        private void AttachButton_Click(object sender, EventArgs e)
         {
+            gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
             if (gameProcess != null)
             {
-                // Logic to toggle cheat goes here
-                MessageBox.Show("Cheat toggled!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Attached to Left 4 Dead 2!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Please start Left 4 Dead 2 first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Game not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void ExitButton_Click(object sender, EventArgs e)
+        private void SomeCheatButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (processCheckTimer != null)
+            if (gameProcess != null)
             {
-                processCheckTimer.Stop();
-                processCheckTimer.Dispose();
+                // Here you would implement code to manipulate memory or send commands to the game.
+                MessageBox.Show("Cheat enabled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please attach to the game first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
