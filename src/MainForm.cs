@@ -1,41 +1,39 @@
 ```csharp
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
-namespace L4D2CheatApp
+namespace Left4Dead2CheatApp
 {
     public partial class MainForm : Form
     {
-        private const string GameProcessName = "Left4Dead2";
-        private const string CheatDataAddress = "0x12345678"; // Example address
+        private const string GameProcessName = "left4dead2";
+        private const int RefreshInterval = 1000; // 1 second
+
         private Timer processCheckTimer;
-        private bool isGameRunning = false;
+        private Process gameProcess;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeGameDetection();
+            InitializeAdditionalComponents();
         }
 
-        private void InitializeGameDetection()
+        private void InitializeAdditionalComponents()
         {
             processCheckTimer = new Timer();
-            processCheckTimer.Interval = 1000; // Check every second
+            processCheckTimer.Interval = RefreshInterval;
             processCheckTimer.Tick += ProcessCheckTimer_Tick;
             processCheckTimer.Start();
         }
 
         private void ProcessCheckTimer_Tick(object sender, EventArgs e)
         {
-            isGameRunning = IsProcessOpen(GameProcessName);
-            UpdateUI();
-        }
-
-        private void UpdateUI()
-        {
-            if (isGameRunning)
+            gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
+            if (gameProcess != null)
             {
                 lblStatus.Text = "Game Running";
                 btnActivateCheat.Enabled = true;
@@ -49,53 +47,50 @@ namespace L4D2CheatApp
 
         private void btnActivateCheat_Click(object sender, EventArgs e)
         {
-            if (!isGameRunning) return;
-            
-            // Example cheat activation logic
-            ActivateCheat(CheatDataAddress);
-            MessageBox.Show("Cheat Activated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (gameProcess != null)
+            {
+                // Insert cheat activation code here
+                MessageBox.Show("Cheat Activated!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Game must be running to activate cheats.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
-        private bool IsProcessOpen(string processName)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Process[] processes = Process.GetProcessesByName(processName);
-            return processes.Length > 0;
-        }
-
-        private void ActivateCheat(string address)
-        {
-            // Implementation to write to the memory address goes here
-            // This is just a placeholder method
+            processCheckTimer.Stop();
+            processCheckTimer.Dispose();
         }
 
         private void InitializeComponent()
         {
             this.lblStatus = new Label();
             this.btnActivateCheat = new Button();
-
+            this.SuspendLayout();
             // 
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Location = new System.Drawing.Point(12, 9);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(80, 13);
+            this.lblStatus.Size = new System.Drawing.Size(0, 13);
             this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Checking...";
-            
             // 
             // btnActivateCheat
             // 
-            this.btnActivateCheat.Enabled = false;
-            this.btnActivateCheat.Location = new System.Drawing.Point(12, 40);
+            this.btnActivateCheat.Location = new System.Drawing.Point(12, 35);
             this.btnActivateCheat.Name = "btnActivateCheat";
             this.btnActivateCheat.Size = new System.Drawing.Size(120, 23);
             this.btnActivateCheat.TabIndex = 1;
             this.btnActivateCheat.Text = "Activate Cheat";
             this.btnActivateCheat.UseVisualStyleBackColor = true;
-            this.btnActivateCheat.Click += new EventHandler(btnActivateCheat_Click);
-            
+            this.btnActivateCheat.Click += new EventHandler(this.btnActivateCheat_Click);
             // 
             // MainForm
             // 
-            this.ClientSize
+            this.ClientSize = new System.Drawing.Size(284, 61);
+            this.Controls.Add(this.btnActivateCheat);
+            this.Controls.Add(this.lblStatus);
+            this.Name = "MainForm";
