@@ -1,49 +1,52 @@
 ```markdown
 # CHANGELOG.md
 
-## [Unreleased]
-
 ## [v2.4.1] - 2023-10-15
 ### Added
-- New feature: **Custom Weapon Loadouts** - Players can now create and save their own weapon loadouts for easy access.
-- Integrated **Versus Mode Helper** - Improved UI for automating common tasks in Versus mode, reducing the need for manual input.
+- **Weapon Scripts**: Introduced new custom weapon scripts for the SCAR and FAMAS rifles enhancing damage output.
+- **In-Game Notifications**: Added pop-up notifications to alert users when cheats are activated.
 
 ### Changed
-- Updated the **Infected Spawner Mod** to support additional spawn options, allowing for more strategic gameplay.
-- Tweaked the user interface for better accessibility and responsiveness.
-- Minor updates to cheat toggles, enhancing performance during gameplay.
+- **Performance Optimization**: Improved app responsiveness by reducing CPU usage during cheat activation.
+- **UI Updates**: Revamped the user interface for easier navigation and improved aesthetics.
 
 ### Fixed
-- Resolved an issue where the **Melee Weapon Unlock** cheat was not functioning correctly in campaign mode.
-- Fixed a bug causing the app to crash when launching zombies with specific configurations.
+- Fixed an issue where the "God Mode" cheat would occasionally not activate properly.
+- Resolved a bug causing the app to crash when loading multiple cheats simultaneously.
 
-## [v2.3.0] - 2023-07-12
+---
+
+## [v2.3.0] - 2023-08-12
 ### Added
-- Introduced **Advanced Configurator** - Users can now adjust more in-depth settings for their cheats, including cooldown times and behavior patterns.
-- Support for **Mutation Mode Cheats** - Added unique cheats specifically tailored for custom mutations.
+- **New Cheat Options**: Added a "No Clip" mode to allow users to fly through walls and navigate freely.
+- **Custom Configurations**: Users can now save and load multiple cheat configurations for different scenarios.
 
 ### Changed
-- Improved the **Aim Assist** feature to provide smoother adjustments while aiming, especially for sniper weapons.
-- Redesigned the layout of the main dashboard for quicker access to all cheat functionalities.
+- **Updated Cheat Database**: Expanded the list of cheats available, including new features for special infected like the Charger and Spitter.
+- **User Manual**: Enhanced documentation with detailed examples of cheat usage in various campaigns.
 
 ### Fixed
-- Corrected an issue with the **Infinite Ammo** cheat that was sometimes not applying correctly in multiplayer sessions.
-- Fixed several minor bugs related to hotkey bindings.
+- Fixed a glitch that prevented the "Infinite Ammo" cheat from working correctly during offline play.
+- Addressed stability issues that sometimes caused the application to freeze upon startup.
 
-## [v2.1.0] - 2023-04-01
+---
+
+## [v2.1.0] - 2023-06-01
 ### Added
-- New cheat: **Instant Reload** - Players can now reload every weapon instantly, improving combat efficiency.
-- Added the ability to toggle **No Clip Mode** for exploration without restrictions in custom maps.
+- **Voice Line Commander**: Introduced a feature for users to trigger specific voice lines for survivors.
+- **Realism Mode Enhancements**: New options for adjusting zombie spawn rates and behavior in Realism mode.
 
 ### Changed
-- Revamped the **Zombies Health Adjuster** for improved performance certainty, ensuring the proper application of health modifications.
-- Made improvements to the overall app performance, reducing loading times and enhancing responsiveness.
+- **User Interface Overhaul**: Updated design for a sleeker look and better usability on all screen sizes.
+- **Cheat Activation Process**: Streamlined the process of activating cheats to improve user experience.
 
 ### Fixed
-- Resolved problems with the **One-Hit Kill** function that were affecting player accuracy in certain scenarios.
-- Fixed UI glitches on the weapon selection screen during rapid toggle.
+- Resolved a bug where cheats would revert to default settings after a game session.
+- Fixed issues with the "One-Hit Kill" feature that caused inconsistencies with certain melee weapons.
 
-## [v2.0.0] - 2023-01-15
+---
+
+## [v2.0.0] - 2023-03-05
 ### Added
-- Initial release with core features including:
-  - **God Mode** for
+- **Initial Release**: Launched the Left 4 Dead 2 Cheat application with foundational features including:
+  - Infinite
