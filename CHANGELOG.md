@@ -1,57 +1,59 @@
 ```markdown
-# Changelog
+# CHANGELOG.md
 
-## [v2.4.1] - 2023-10-10
+## [v2.4.1] - 2023-10-01
 ### Added
-- New "Custom Campaign Menu" to easily launch user-created campaigns.
-- Added support for latest game updates, ensuring compatibility with any recent changes in Left 4 Dead 2.
-- Introduced "Survival Mode" stamina cheats for infinite health and ammo.
-
-### Changed
-- Improved graphical user interface for easier navigation and usage.
-- Updated cheat logic for "God Mode" to reduce detection risks by anti-cheat systems.
+- Added support for **The Last Stand** update, including new weapon unlocks and modified zombie behaviors.
+- Introduced a new cheat command: `give_launcher`, which provides access to the new Grenade Launcher.
 
 ### Fixed
-- Fixed a bug causing crashes when loading certain mods from the "Mods Menu."
-- Resolved an issue where the "Single Player Bots" were not functioning properly with the cheat active.
+- Resolved an issue where the **Infection Mode** cheat would sometimes prematurely end the game session.
+- Fixed the bug causing game crashes when enabling cheats during certain cutscenes.
+
+### Changed
+- Improved compatibility with the latest Windows 11 build.
+- Updated user interface with new icons for better navigation and cheat category visibility.
 
 ---
 
-## [v2.3.0] - 2023-08-20
+## [v2.3.0] - 2023-06-15
 ### Added
-- New toggle for "Infinite Pip-Boys" in Versus Mode for quick weapon respawns.
-- Enhanced "No Clip" functionality to allow flight through the environment without collisions.
-
-### Changed
-- Updated the game hook for better stability and performance with "Realism Versus" mode.
-- Streamlined settings for easier adjustment of cheat parameters without restarting the app.
+- New feature: **Zombie Speed Modifier** allows players to adjust the speed of different infected types.
+- Implemented a Safe Room Override option, letting players skip directly to the safe room regardless of progress.
 
 ### Fixed
-- Fixed an issue where the "Invisibility" cheat was not activating during "Scavenge" rounds.
-- Corrected visual glitches when using the "Speed Boost" in offline play.
+- Corrected the issue where the **Unlimited Ammo** cheat was not functioning correctly with custom weapon skins.
+- Fixed a rare error that caused the application to fail on launch for some users.
+
+### Changed
+- Refined the interface layout to streamline cheat selection.
+- Enhanced cheat activation feedback with visual alerts when cheats are successfully enabled.
 
 ---
 
-## [v2.1.0] - 2023-06-15
+## [v2.1.0] - 2023-03-10
 ### Added
-- Introduced "Tank Control" cheats allowing players to spawn tanks at will during gameplay.
-- Added a new option to speed up game time, enhancing efficiency in speedruns.
-
-### Changed
-- Renamed menu options for better clarity and user understanding.
-- Enhanced code for "Unlimited Ammo" to ensure smoother operation during intense firefights.
+- Introduced a **Spawn Director** feature that allows players to see and manipulate spawn events for special infected.
+- Added an experimental feature allowing players to **disable friendly fire** for fully cooperative play.
 
 ### Fixed
-- Fixed a bug that prevented "Quick Revive" from working properly in the "Dead Air" campaign.
-- Resolved issues with keyboard shortcuts conflicting with standard game controls.
+- Resolved an issue with the **Super Healing** cheat not applying correctly during Versus mode.
+- Fixed minor bugs affecting the display of cheat descriptions in the application.
+
+### Changed
+- Improved cheat activation responsiveness and stability.
+- Updated the tutorial section to better explain advanced features and their usage.
 
 ---
 
-## [v2.0.0] - 2023-04-01
+## [v2.0.0] - 2023-01-05
 ### Added
-- Initial release of the Left 4 Dead 2 cheat application.
-- Basic cheats included: "God Mode," "Unlimited Health," and "No Clip."
-- Support for both Single Player and Versus Modes for flexibility.
+- Complete overhaul of the app architecture for improved performance and stability.
+- Included a fresh cheat compilation with classic cheats such as `noclip`, `god`, and `sv_infinite_ammo`.
+
+### Fixed
+- Addressed various stability issues leading to unexpected crashes during gameplay.
+- Fixed compatibility issues with older versions of Left 4 Dead 2.
 
 ### Changed
-- Established foundational GUI layout, setting the stage for future updates and enhancements
+- Redesigned the user interface for better
