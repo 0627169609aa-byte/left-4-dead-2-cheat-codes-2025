@@ -1,82 +1,102 @@
 ```csharp
 using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace L4DCheatApp
+namespace L4D2CheatApp
 {
     public partial class MainForm : Form
     {
-        private const string GameProcessName = "left4dead2";
-        private const int TimerInterval = 1000; // 1 second
         private Timer processCheckTimer;
-        private Process gameProcess;
+        private const string GameProcessName = "left4dead2";
+        private ProcessGameState currentGameState;
+
+        private enum ProcessGameState
+        {
+            NotRunning,
+            Running
+        }
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeProcessCheckTimer();
+            InitializeCustomComponents();
         }
 
-        private void InitializeComponent()
-        {
-            this.Text = "Left 4 Dead 2 Cheat App";
-            this.Size = new System.Drawing.Size(400, 300);
-            Button attachButton = new Button() { Text = "Attach to Game", Location = new System.Drawing.Point(50, 50) };
-            attachButton.Click += AttachButton_Click;
-
-            Button someCheatButton = new Button() { Text = "Enable Cheat", Location = new System.Drawing.Point(50, 100) };
-            someCheatButton.Click += SomeCheatButton_Click;
-
-            this.Controls.Add(attachButton);
-            this.Controls.Add(someCheatButton);
-        }
-
-        private void InitializeProcessCheckTimer()
+        private void InitializeCustomComponents()
         {
             processCheckTimer = new Timer();
-            processCheckTimer.Interval = TimerInterval;
+            processCheckTimer.Interval = 1000; // 1 second
             processCheckTimer.Tick += ProcessCheckTimer_Tick;
             processCheckTimer.Start();
         }
 
         private void ProcessCheckTimer_Tick(object sender, EventArgs e)
         {
-            gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
-            if (gameProcess == null)
-            {
-                MessageBox.Show("Game not running!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                processCheckTimer.Stop();
-            }
+            CheckGameProcess();
         }
 
-        private void AttachButton_Click(object sender, EventArgs e)
+        private void CheckGameProcess()
         {
-            gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
-            if (gameProcess != null)
+            Process[] gameProcesses = Process.GetProcessesByName(GameProcessName);
+            currentGameState = gameProcesses.Length > 0 ? ProcessGameState.Running : ProcessGameState.NotRunning;
+
+            if (currentGameState == ProcessGameState.Running)
             {
-                MessageBox.Show("Attached to Left 4 Dead 2!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                lblStatus.Text = "Game is running.";
+                btnActivateCheats.Enabled = true;
             }
             else
             {
-                MessageBox.Show("Game not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblStatus.Text = "Game is not running.";
+                btnActivateCheats.Enabled = false;
             }
         }
 
-        private void SomeCheatButton_Click(object sender, EventArgs e)
+        private void btnActivateCheats_Click(object sender, EventArgs e)
         {
-            if (gameProcess != null)
+            if (currentGameState == ProcessGameState.Running)
             {
-                // Here you would implement code to manipulate memory or send commands to the game.
-                MessageBox.Show("Cheat enabled!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Activate cheats (pseudo-code example)
+                MessageBox.Show("Cheats activated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Add cheat activation logic here
             }
             else
             {
-                MessageBox.Show("Please attach to the game first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The game is not running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }
-}
-```
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            processCheckTimer.Stop();
+            processCheckTimer.Dispose();
+        }
+
+        private void InitializeComponent()
+        {
+            this.btnActivateCheats = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // btnActivateCheats
+            // 
+            this.btnActivateCheats.Location = new System.Drawing.Point(12, 36);
+            this.btnActivateCheats.Name = "btnActivateCheats";
+            this.btnActivateCheats.Size = new System.Drawing.Size(150, 23);
+            this.btnActivateCheats.TabIndex = 1;
+            this.btnActivateCheats.Text = "Activate Cheats";
+            this.btnActivateCheats.UseVisualStyleBackColor = true;
+            this.btnActivateCheats.Click += new System.EventHandler(this.btnActivateCheats_Click);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location
