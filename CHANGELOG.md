@@ -1,52 +1,54 @@
 ```markdown
 # CHANGELOG.md
 
-## [v2.4.1] - 2023-10-15
-### Added
-- **Weapon Scripts**: Introduced new custom weapon scripts for the SCAR and FAMAS rifles enhancing damage output.
-- **In-Game Notifications**: Added pop-up notifications to alert users when cheats are activated.
+## [v2.4.1] - 2023-10-05
+### Enhancements
+- Improved compatibility with the latest Left 4 Dead 2 update.
+- Added new cheat toggle options for "God Mode" and "Unlimited Ammo" for offline mode.
+- Enhanced performance of the "Instant Reload" feature, reducing lag.
 
-### Changed
-- **Performance Optimization**: Improved app responsiveness by reducing CPU usage during cheat activation.
-- **UI Updates**: Revamped the user interface for easier navigation and improved aesthetics.
-
-### Fixed
-- Fixed an issue where the "God Mode" cheat would occasionally not activate properly.
-- Resolved a bug causing the app to crash when loading multiple cheats simultaneously.
+### Bug Fixes
+- Fixed an issue where "No Clip" mode would sometimes prevent player respawn.
+- Resolved a bug causing crashes when using multiple cheats simultaneously.
+- Updated UI elements to improve visibility and accessibility.
 
 ---
 
-## [v2.3.0] - 2023-08-12
-### Added
-- **New Cheat Options**: Added a "No Clip" mode to allow users to fly through walls and navigate freely.
-- **Custom Configurations**: Users can now save and load multiple cheat configurations for different scenarios.
+## [v2.3.0] - 2023-08-15
+### New Features
+- Introduced "Zombie Spawn Control" allowing users to adjust the number of zombies in a campaign or versus mode.
+- Added a "Speed Hack" feature, enabling players to manipulate their movement speed.
 
-### Changed
-- **Updated Cheat Database**: Expanded the list of cheats available, including new features for special infected like the Charger and Spitter.
-- **User Manual**: Enhanced documentation with detailed examples of cheat usage in various campaigns.
+### Enhancements
+- Improved the user interface for easier navigation and access to cheat options.
+- Added a tutorial mode to guide new users through available features.
 
-### Fixed
-- Fixed a glitch that prevented the "Infinite Ammo" cheat from working correctly during offline play.
-- Addressed stability issues that sometimes caused the application to freeze upon startup.
-
----
-
-## [v2.1.0] - 2023-06-01
-### Added
-- **Voice Line Commander**: Introduced a feature for users to trigger specific voice lines for survivors.
-- **Realism Mode Enhancements**: New options for adjusting zombie spawn rates and behavior in Realism mode.
-
-### Changed
-- **User Interface Overhaul**: Updated design for a sleeker look and better usability on all screen sizes.
-- **Cheat Activation Process**: Streamlined the process of activating cheats to improve user experience.
-
-### Fixed
-- Resolved a bug where cheats would revert to default settings after a game session.
-- Fixed issues with the "One-Hit Kill" feature that caused inconsistencies with certain melee weapons.
+### Bug Fixes
+- Addressed stability issues that could occur when running the app alongside certain third-party tools.
+- Fixed a glitch causing the "Infinite Health" feature to misbehave during multiplayer sessions.
 
 ---
 
-## [v2.0.0] - 2023-03-05
-### Added
-- **Initial Release**: Launched the Left 4 Dead 2 Cheat application with foundational features including:
-  - Infinite
+## [v2.1.0] - 2023-06-10
+### New Features
+- Introduced "Weapon Customization" options, allowing users to change weapon skins and attributes.
+- Added a feature to "Disable Friendly Fire," enhancing cooperative gameplay without unintentional harm.
+
+### Enhancements
+- Increased the speed of activation for all cheat functions, making them more responsive in gameplay.
+- Improved the overall user experience and reduced loading times.
+
+### Bug Fixes
+- Fixed an issue that caused the app to misinterpret game data leading to incorrect cheat activations.
+- Resolved a conflict between the app and the "Left 4 Dead 2 SDK" preventing certain features from being activated.
+
+---
+
+## [v2.0.0] - 2023-03-01
+### New Features
+- Initial release of the Left 4 Dead 2 Cheat application.
+- Core cheats include "Infinite Health," "Unlimited Ammo," "No Clip," and "Instant Respawn."
+- Implemented an easy-to-use interface designed specifically for Left 4 Dead 2.
+
+### Enhancements
+- Default settings optimized for seamless integration with Left 4 Dead 2's
