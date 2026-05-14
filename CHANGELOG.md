@@ -3,41 +3,60 @@
 
 ## [v2.4.1] - 2023-10-15
 ### Added
-- New cheat option: **Unlimited Health** for survivors, allowing players to enjoy the map without worrying about taking damage.
-- Implemented **Custom Spawn Points** for infected, giving players the ability to set their preferred locations during gameplay.
-  
+- Introduced an "Infinite Health" toggle feature for all survivors.
+- Added a new option to customize the timer for the "Infected Reload" cheat.
+
 ### Fixed
-- Resolved an issue where the **Wall Hack** feature would occasionally fail to display enemy locations in *The Passing* campaign.
-- Fixed display bug with cheat overlays that caused flickering graphics during high-intensity moments.
+- Resolved an issue causing "God Mode" to not function correctly under certain conditions.
+- Fixed a bug where the "Auto-Aim" feature would inadvertently engage with melee weapons.
 
-### Changed
-- Updated cheat detection algorithm to minimize false positives, ensuring a smoother experience while using the app.
-- Improved performance of the **God Mode** activation to reduce lag during intense gameplay moments.
+### Improved
+- Enhanced the user interface for easier navigation and access to mod settings.
+- Optimized performance for faster startup times.
 
-## [v2.3.0] - 2023-08-01
+---
+
+## [v2.3.0] - 2023-08-12
 ### Added
-- Introduced a feature for **Infinite Ammo** on all weapon types, enabling players to unleash unlimited fire on the infected horde.
-- Added toggles for **Zombie Speed** manipulation, allowing players to slow down or speed up the horde for customized gameplay.
+- Added support for co-op campaign cheats, including shared resources for players.
+- Implemented a new "Zombie Speed Boost" feature to make infected players faster.
 
 ### Fixed
-- Fixed a bug that caused the **Teleport to Safe Room** function to malfunction in certain custom maps.
-- Addressed an issue where the **No Clip** feature would occasionally conflict with environmental props leading to player entrapment.
+- Corrected an issue where certain cheats were not compatible with the "Realism Mode".
+- Fixed a crash that occurred when toggling "One-Hit Kill" during special infected encounters.
 
-### Changed
-- Updated user interface for easier navigation and quicker access to cheat options, enhancing overall user experience.
-- Improved compatibility with the latest game patches for a more seamless functioning of all features.
+### Improved
+- Improved the cheat input responsiveness for smoother gameplay experience.
+- Updated documentation for clearer guidance on activating new features.
 
-## [v2.1.0] - 2023-05-10
+---
+
+## [v2.1.0] - 2023-05-05
 ### Added
-- New option for **One-Hit Kills**, making it easier to dispatch even the toughest enemy types with a single blow.
-- Introduced a feature to modify **Infected Spawn Rates**, allowing players to control the intensity of enemy encounters.
+- New "Toggle No Clip" feature for players to navigate through walls and obstacles.
+- Added hotkeys for faster access to popular cheats like "Unlimited Ammo" and "Super Speed".
 
 ### Fixed
-- Fixed an exploit where the **Item Duplication** feature could cause crashes in multiplayer mode.
-- Resolved an issue where the **Invisible** cheat would sometimes leave trails, making players visible to the infected.
+- Addressed a bug where the "Unlimited Grenades" feature would disappear after respawning.
+- Fixed a visual glitch affecting character models while using cheats.
 
-### Changed
-- Revised cheat activation process to be more intuitive; players can now hold a single key to access the cheat menu.
-- Enhanced help documentation within the app for setting up and using various cheats effectively.
+### Improved
+- Enhanced compatibility with Windows 11 for better stability.
+- Updated user interface to include cheat category icons for better organization.
 
-## [v2.0.0] - 2023-02-01
+---
+
+## [v2.0.0] - 2023-03-01
+### Added
+- Initial release of the Left 4 Dead 2 cheat app.
+- Features included: "Infinite Ammo", "God Mode", "Spawn Items", and "No Clip".
+
+### Fixed
+- Resolved minor installation issues on Windows 10 platforms.
+- Fixed inconsistencies in the cheat activation process.
+
+### Improved
+- User experience enhancements in the settings menu.
+- Initial performance optimizations for smoother operation.
+
+```
