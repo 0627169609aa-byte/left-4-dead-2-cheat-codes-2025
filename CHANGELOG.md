@@ -1,54 +1,49 @@
 ```markdown
 # CHANGELOG.md
 
-## [v2.4.1] - 2023-10-05
-### Enhancements
-- Improved compatibility with the latest Left 4 Dead 2 update.
-- Added new cheat toggle options for "God Mode" and "Unlimited Ammo" for offline mode.
-- Enhanced performance of the "Instant Reload" feature, reducing lag.
+## [v2.4.1] - 2023-10-15
+### Added
+- New feature to customize the **Game Cheat Menu** with user-definable hotkeys for faster access to cheats.
+- Support for new game updates including compatibility with the latest Left 4 Dead 2 patch released in October 2023.
+- Added preset options for popular mods such as **Mutation** and **Versus Mode**, allowing for quick setup of cheats.
 
-### Bug Fixes
-- Fixed an issue where "No Clip" mode would sometimes prevent player respawn.
-- Resolved a bug causing crashes when using multiple cheats simultaneously.
-- Updated UI elements to improve visibility and accessibility.
+### Fixed
+- Resolved an issue where the **God Mode** would deactivate after respawning in **Scavenge** mode.
+- Fixed minor bugs related to the display of the **Infection Rate** in the cheat stats overlay.
 
----
-
-## [v2.3.0] - 2023-08-15
-### New Features
-- Introduced "Zombie Spawn Control" allowing users to adjust the number of zombies in a campaign or versus mode.
-- Added a "Speed Hack" feature, enabling players to manipulate their movement speed.
-
-### Enhancements
-- Improved the user interface for easier navigation and access to cheat options.
-- Added a tutorial mode to guide new users through available features.
-
-### Bug Fixes
-- Addressed stability issues that could occur when running the app alongside certain third-party tools.
-- Fixed a glitch causing the "Infinite Health" feature to misbehave during multiplayer sessions.
+### Changed
+- Updated the UI for the cheat selection screen to enhance user experience and improve visibility of available options.
 
 ---
 
-## [v2.1.0] - 2023-06-10
-### New Features
-- Introduced "Weapon Customization" options, allowing users to change weapon skins and attributes.
-- Added a feature to "Disable Friendly Fire," enhancing cooperative gameplay without unintentional harm.
+## [v2.3.0] - 2023-06-01
+### Added
+- Introduced **Weapon Unlocker** feature which allows instant access to all weapons available in Left 4 Dead 2.
+- Enhanced the **Zombie Modifier** system with new options to adjust the type and number of zombies during gameplay.
 
-### Enhancements
-- Increased the speed of activation for all cheat functions, making them more responsive in gameplay.
-- Improved the overall user experience and reduced loading times.
+### Fixed
+- Addressed a crash issue when applying cheats during **Campaign** mode that would disrupt game stability.
+- Fixed text overflow in the **Hoverhelp** for the **Spawn Infected Cheat**.
 
-### Bug Fixes
-- Fixed an issue that caused the app to misinterpret game data leading to incorrect cheat activations.
-- Resolved a conflict between the app and the "Left 4 Dead 2 SDK" preventing certain features from being activated.
+### Changed
+- Major redesign of the settings panel to improve functionality, including clearer sections for **Gameplay** and **Graphics** settings.
 
 ---
 
-## [v2.0.0] - 2023-03-01
-### New Features
-- Initial release of the Left 4 Dead 2 Cheat application.
-- Core cheats include "Infinite Health," "Unlimited Ammo," "No Clip," and "Instant Respawn."
-- Implemented an easy-to-use interface designed specifically for Left 4 Dead 2.
+## [v2.1.0] - 2023-03-12
+### Added
+- Added support for custom **Character Skins** to make the gameplay more personalized.
+- Implemented an **Auto-Respawn** feature for quicker gameplay experience in **Versus** and **Survival** modes.
 
-### Enhancements
-- Default settings optimized for seamless integration with Left 4 Dead 2's
+### Fixed
+- Corrected issues with the **Health Regeneration** cheat not functioning properly in the **Dead Air** campaign.
+- Patched an exploit that allowed cheats to be used in **Offline Mode**, ensuring a more secure experience.
+
+### Changed
+- Adjusted the performance of the **Cheat Engine** to optimize memory usage and reduce game lag during intensive cheat usage.
+
+---
+
+## [v2.0.0] - 2022-12-10
+### Added
+- Initial release of the app with fundamental cheat features including **Infinite Ammo**, **No Clip**, and **Infinite Health**
