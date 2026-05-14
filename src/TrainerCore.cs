@@ -3,91 +3,71 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-public class ProcessMemory
+public class TrainerCore
 {
-    const int PROCESS_ALL_ACCESS = 0x1F0FFF;
+    private const string GameProcessName = "left4dead2";
+    private const int HealthAddress = 0x00A9F7B0; // Example address for player health
+    private const int AmmoAddress = 0x00A9F7C0; // Example address for player ammo
 
-    private Process process;
+    private Process gameProcess;
+    private IntPtr processHandle;
 
-    public bool AttachToProcess(string processName)
+    [DllImport("kernel32.dll")]
+    private static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
+
+    [DllImport("kernel32.dll")]
+    private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint size, out IntPtr lpNumberOfBytesRead);
+
+    [DllImport("kernel32.dll")]
+    private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint size, out IntPtr lpNumberOfBytesWritten);
+
+    private const uint PROCESS_VM_READ = 0x0010;
+    private const uint PROCESS_VM_WRITE = 0x0020;
+    private const uint PROCESS_QUERY_INFORMATION = 0x0400;
+
+    public bool AttachToProcess()
     {
-        Process[] processes = Process.GetProcessesByName(processName);
-        if (processes.Length == 0)
-            return false;
+        gameProcess = Process.GetProcessesByName(GameProcessName)[0];
+        if (gameProcess == null) return false;
 
-        process = processes[0];
-        return true;
+        processHandle = OpenProcess(PROCESS_VM_READ | PROCESS_VM_WRITE | PROCESS_QUERY_INFORMATION, false, gameProcess.Id);
+        return processHandle != IntPtr.Zero;
     }
 
     public bool IsGameRunning()
     {
-        return process != null && !process.HasExited;
+        return Process.GetProcessesByName(GameProcessName).Length > 0;
     }
 
-    public float ReadFloat(IntPtr address)
+    public float ReadFloat(int address)
     {
         byte[] buffer = new byte[4];
-        ReadProcessMemory(process.Handle, address, buffer, buffer.Length, out _);
+        ReadProcessMemory(processHandle, (IntPtr)address, buffer, (uint)buffer.Length, out _);
         return BitConverter.ToSingle(buffer, 0);
     }
 
-    public void WriteFloat(IntPtr address, float value)
+    public void WriteFloat(int address, float value)
     {
         byte[] buffer = BitConverter.GetBytes(value);
-        WriteProcessMemory(process.Handle, address, buffer, buffer.Length, out _);
+        WriteProcessMemory(processHandle, (IntPtr)address, buffer, (uint)buffer.Length, out _);
     }
 
-    public int ReadInt(IntPtr address)
+    public int ReadInt(int address)
     {
         byte[] buffer = new byte[4];
-        ReadProcessMemory(process.Handle, address, buffer, buffer.Length, out _);
+        ReadProcessMemory(processHandle, (IntPtr)address, buffer, (uint)buffer.Length, out _);
         return BitConverter.ToInt32(buffer, 0);
     }
 
-    public void WriteInt(IntPtr address, int value)
+    public void WriteInt(int address, int value)
     {
         byte[] buffer = BitConverter.GetBytes(value);
-        WriteProcessMemory(process.Handle, address, buffer, buffer.Length, out _);
-    }
-
-    [DllImport("kernel32.dll")]
-    static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
-
-    [DllImport("kernel32.dll")]
-    static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesWritten);
-
-    // Left 4 Dead 2 static addresses (replace with real addresses)
-    public static readonly IntPtr PlayerHealthAddress = (IntPtr)0x01234567;
-    public static readonly IntPtr PlayerAmmoAddress = (IntPtr)0x01234568;
-
-    // Additional static addresses can be defined here
-}
-
-public class TrainerCore
-{
-    private ProcessMemory processMemory = new ProcessMemory();
-
-    public void Initialize()
-    {
-        if (!processMemory.AttachToProcess("left4dead2"))
-        {
-            Console.WriteLine("Game not running.");
-            return;
-        }
-
-        Console.WriteLine("Trainer initialized.");
+        WriteProcessMemory(processHandle, (IntPtr)address, buffer, (uint)buffer.Length, out _);
     }
 
     public void SetPlayerHealth(float health)
     {
-        if (processMemory.IsGameRunning())
-            processMemory.WriteFloat(ProcessMemory.PlayerHealthAddress, health);
+        WriteFloat(HealthAddress, health);
     }
 
-    public void SetPlayerAmmo(int ammo)
-    {
-        if (processMemory.IsGameRunning())
-            processMemory.WriteInt(ProcessMemory.PlayerAmmoAddress, ammo);
-    }
-}
-```
+    public
