@@ -1,40 +1,36 @@
+Here is a basic implementation of a `TrainerCore.cs` for Left 4 Dead 2, including the `ProcessMemory` class with methods for reading and writing float and integer values. Note that this code is for educational purposes only and should not be used for cheating in games.
+
 ```csharp
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-public class TrainerCore
+public class ProcessMemory
 {
-    private const string ProcessName = "left4dead2";
-    private Process process;
     private IntPtr processHandle;
+    private Process targetProcess;
 
-    // Static addresses
-    private static readonly int playerHealthAddress = 0x01234567; // Replace with actual address
-    private static readonly int playerAmmoAddress = 0x01234568; // Replace with actual address
+    // Example static addresses (these need to be correct based on the game's memory structure)
+    private const int HealthAddress = 0x00ABCD; // Replace with actual address
+    private const int AmmoAddress = 0x00EFAB;  // Replace with actual address
 
-    public bool AttachToProcess()
+    public bool AttachToProcess(string processName)
     {
-        process = Process.GetProcessesByName(ProcessName).FirstOrDefault();
+        targetProcess = Process.GetProcessesByName(processName)[0];
+        if (targetProcess == null) return false;
 
-        if (process == null)
-        {
-            Console.WriteLine("Game not running.");
-            return false;
-        }
-
-        processHandle = OpenProcess(ProcessAccessFlags.All, false, process.Id);
+        processHandle = OpenProcess(ProcessAccessFlags.All, false, targetProcess.Id);
         return processHandle != IntPtr.Zero;
     }
 
-    public bool IsGameRunning()
+    public bool IsGameRunning(string processName)
     {
-        return process != null && !process.HasExited;
+        return Process.GetProcessesByName(processName).Length > 0;
     }
 
     public float ReadFloat(int address)
     {
-        byte[] buffer = new byte[4];
+        byte[] buffer = new byte[sizeof(float)];
         ReadProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
         return BitConverter.ToSingle(buffer, 0);
     }
@@ -47,7 +43,7 @@ public class TrainerCore
 
     public int ReadInt(int address)
     {
-        byte[] buffer = new byte[4];
+        byte[] buffer = new byte[sizeof(int)];
         ReadProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
         return BitConverter.ToInt32(buffer, 0);
     }
@@ -58,21 +54,16 @@ public class TrainerCore
         WriteProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
     }
 
-    [DllImport("kernel32.dll", SetLastError = true)]
+    [DllImport("kernel32.dll")]
     private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
-    [DllImport("kernel32.dll", SetLastError = true)]
+    [DllImport("kernel32.dll")]
     private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
 
-    [DllImport("kernel32.dll", SetLastError = true)]
+    [DllImport("kernel32.dll")]
     private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesWritten);
 
     [Flags]
     private enum ProcessAccessFlags : uint
     {
-        All = 0x001F0FFF
-    }
-}
-```
-
-**Note:** The provided address values are placeholders and should be replaced with the actual memory addresses relevant to the game. Additionally, please ensure you comply with all
+        All = 0x001F0FFF,
