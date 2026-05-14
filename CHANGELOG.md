@@ -1,49 +1,57 @@
 ```markdown
-# CHANGELOG.md
+# Changelog
 
-## [v2.4.1] - 2023-10-15
+## [v2.4.1] - 2023-10-10
 ### Added
-- New feature to customize the **Game Cheat Menu** with user-definable hotkeys for faster access to cheats.
-- Support for new game updates including compatibility with the latest Left 4 Dead 2 patch released in October 2023.
-- Added preset options for popular mods such as **Mutation** and **Versus Mode**, allowing for quick setup of cheats.
-
-### Fixed
-- Resolved an issue where the **God Mode** would deactivate after respawning in **Scavenge** mode.
-- Fixed minor bugs related to the display of the **Infection Rate** in the cheat stats overlay.
+- New "Custom Campaign Menu" to easily launch user-created campaigns.
+- Added support for latest game updates, ensuring compatibility with any recent changes in Left 4 Dead 2.
+- Introduced "Survival Mode" stamina cheats for infinite health and ammo.
 
 ### Changed
-- Updated the UI for the cheat selection screen to enhance user experience and improve visibility of available options.
+- Improved graphical user interface for easier navigation and usage.
+- Updated cheat logic for "God Mode" to reduce detection risks by anti-cheat systems.
+
+### Fixed
+- Fixed a bug causing crashes when loading certain mods from the "Mods Menu."
+- Resolved an issue where the "Single Player Bots" were not functioning properly with the cheat active.
 
 ---
 
-## [v2.3.0] - 2023-06-01
+## [v2.3.0] - 2023-08-20
 ### Added
-- Introduced **Weapon Unlocker** feature which allows instant access to all weapons available in Left 4 Dead 2.
-- Enhanced the **Zombie Modifier** system with new options to adjust the type and number of zombies during gameplay.
-
-### Fixed
-- Addressed a crash issue when applying cheats during **Campaign** mode that would disrupt game stability.
-- Fixed text overflow in the **Hoverhelp** for the **Spawn Infected Cheat**.
+- New toggle for "Infinite Pip-Boys" in Versus Mode for quick weapon respawns.
+- Enhanced "No Clip" functionality to allow flight through the environment without collisions.
 
 ### Changed
-- Major redesign of the settings panel to improve functionality, including clearer sections for **Gameplay** and **Graphics** settings.
+- Updated the game hook for better stability and performance with "Realism Versus" mode.
+- Streamlined settings for easier adjustment of cheat parameters without restarting the app.
+
+### Fixed
+- Fixed an issue where the "Invisibility" cheat was not activating during "Scavenge" rounds.
+- Corrected visual glitches when using the "Speed Boost" in offline play.
 
 ---
 
-## [v2.1.0] - 2023-03-12
+## [v2.1.0] - 2023-06-15
 ### Added
-- Added support for custom **Character Skins** to make the gameplay more personalized.
-- Implemented an **Auto-Respawn** feature for quicker gameplay experience in **Versus** and **Survival** modes.
-
-### Fixed
-- Corrected issues with the **Health Regeneration** cheat not functioning properly in the **Dead Air** campaign.
-- Patched an exploit that allowed cheats to be used in **Offline Mode**, ensuring a more secure experience.
+- Introduced "Tank Control" cheats allowing players to spawn tanks at will during gameplay.
+- Added a new option to speed up game time, enhancing efficiency in speedruns.
 
 ### Changed
-- Adjusted the performance of the **Cheat Engine** to optimize memory usage and reduce game lag during intensive cheat usage.
+- Renamed menu options for better clarity and user understanding.
+- Enhanced code for "Unlimited Ammo" to ensure smoother operation during intense firefights.
+
+### Fixed
+- Fixed a bug that prevented "Quick Revive" from working properly in the "Dead Air" campaign.
+- Resolved issues with keyboard shortcuts conflicting with standard game controls.
 
 ---
 
-## [v2.0.0] - 2022-12-10
+## [v2.0.0] - 2023-04-01
 ### Added
-- Initial release of the app with fundamental cheat features including **Infinite Ammo**, **No Clip**, and **Infinite Health**
+- Initial release of the Left 4 Dead 2 cheat application.
+- Basic cheats included: "God Mode," "Unlimited Health," and "No Clip."
+- Support for both Single Player and Versus Modes for flexibility.
+
+### Changed
+- Established foundational GUI layout, setting the stage for future updates and enhancements
