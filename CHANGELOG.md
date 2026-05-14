@@ -1,59 +1,56 @@
 ```markdown
 # CHANGELOG.md
 
-## [v2.4.1] - 2023-10-01
+## [v2.4.1] - 2023-10-15
 ### Added
-- Added support for **The Last Stand** update, including new weapon unlocks and modified zombie behaviors.
-- Introduced a new cheat command: `give_launcher`, which provides access to the new Grenade Launcher.
-
-### Fixed
-- Resolved an issue where the **Infection Mode** cheat would sometimes prematurely end the game session.
-- Fixed the bug causing game crashes when enabling cheats during certain cutscenes.
+- New **Infected Aimbot** feature for more precise targeting of special infected.
+- **Item Spawn Selector** interface improvements, now allows filtering by item type (weapons, health kits, etc.).
 
 ### Changed
-- Improved compatibility with the latest Windows 11 build.
-- Updated user interface with new icons for better navigation and cheat category visibility.
+- Enhanced **No Clip** functionality for better navigation through complex maps.
+- Improved performance of the **Speed Hack** feature, reducing in-game lag and increasing responsiveness.
+
+### Fixed
+- Resolved a bug where **God Mode** would deactivate unexpectedly during multiplayer sessions.
+- Fixed an issue with displaying **SV_Touch** commands, ensuring all commands are clearly visible in the console.
 
 ---
 
-## [v2.3.0] - 2023-06-15
+## [v2.3.0] - 2023-08-07
 ### Added
-- New feature: **Zombie Speed Modifier** allows players to adjust the speed of different infected types.
-- Implemented a Safe Room Override option, letting players skip directly to the safe room regardless of progress.
-
-### Fixed
-- Corrected the issue where the **Unlimited Ammo** cheat was not functioning correctly with custom weapon skins.
-- Fixed a rare error that caused the application to fail on launch for some users.
+- Introduced **Custom Zombies** feature allowing players to load models for infected.
+- Added **Cheat Toggle Hotkeys** for instant enable/disable of most features.
 
 ### Changed
-- Refined the interface layout to streamline cheat selection.
-- Enhanced cheat activation feedback with visual alerts when cheats are successfully enabled.
+- Updated the engine compatibility checks to support the latest game updates.
+- Refined the **Auto-Respawn** feature to work seamlessly with dedicated servers.
+
+### Fixed
+- Fixed a crash that occurred when using the **Weapon Spawner** feature on certain maps.
+- Addressed issues with the **Wallhack** that caused it to not function properly in high-stress environments.
 
 ---
 
-## [v2.1.0] - 2023-03-10
+## [v2.1.0] - 2023-05-12
 ### Added
-- Introduced a **Spawn Director** feature that allows players to see and manipulate spawn events for special infected.
-- Added an experimental feature allowing players to **disable friendly fire** for fully cooperative play.
-
-### Fixed
-- Resolved an issue with the **Super Healing** cheat not applying correctly during Versus mode.
-- Fixed minor bugs affecting the display of cheat descriptions in the application.
+- New **Zombie Prediction** feature that helps players to avoid unexpected attacks.
+- Implemented **Visual Customizations** to change HUD elements while cheats are active.
 
 ### Changed
-- Improved cheat activation responsiveness and stability.
-- Updated the tutorial section to better explain advanced features and their usage.
+- Improved **Aim Assist** accuracy, especially against fast-moving targets like Smoker and Hunter.
+- Modified the **Max Health** cheat to now include a gradual health regeneration option.
+
+### Fixed
+- Fixed a rare instance where the **Model Spoofing** feature would cause client-side crashes.
+- Resolved an issue in the *console command* interface where commands were not being recognized.
 
 ---
 
-## [v2.0.0] - 2023-01-05
+## [v2.0.0] - 2023-02-20
 ### Added
-- Complete overhaul of the app architecture for improved performance and stability.
-- Included a fresh cheat compilation with classic cheats such as `noclip`, `god`, and `sv_infinite_ammo`.
-
-### Fixed
-- Addressed various stability issues leading to unexpected crashes during gameplay.
-- Fixed compatibility issues with older versions of Left 4 Dead 2.
+- Initial release of the application with basic functionality including **God Mode**, **Infinite Ammo**, and **No Clip**.
+- Integrated console for executing commands directly within the game.
 
 ### Changed
-- Redesigned the user interface for better
+- User interface overhaul for easier navigation and accessibility to features.
+- Updated documentation to provide clearer instructions on
