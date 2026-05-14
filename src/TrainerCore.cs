@@ -3,66 +3,76 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-public static class TrainerCore
+public class TrainerCore
 {
-    private const string GameProcessName = "left4dead2";
-    private static Process gameProcess;
+    private const string ProcessName = "left4dead2";
+    private Process process;
+    private IntPtr processHandle;
 
-    // Example memory addresses (these need to be updated for actual use)
-    private const int HealthAddress = 0x01234567; // Replace with correct address
-    private const int AmmoAddress = 0x01234568;   // Replace with correct address
-    private const int ScoreAddress = 0x01234569;  // Replace with correct address
+    // Static addresses
+    private static readonly int playerHealthAddress = 0x01234567; // Replace with actual address
+    private static readonly int playerAmmoAddress = 0x01234568; // Replace with actual address
 
-    public static bool AttachToProcess()
+    public bool AttachToProcess()
     {
-        try
+        process = Process.GetProcessesByName(ProcessName).FirstOrDefault();
+
+        if (process == null)
         {
-            gameProcess = Process.GetProcessesByName(GameProcessName)[0];
-            return gameProcess != null;
-        }
-        catch
-        {
+            Console.WriteLine("Game not running.");
             return false;
         }
+
+        processHandle = OpenProcess(ProcessAccessFlags.All, false, process.Id);
+        return processHandle != IntPtr.Zero;
     }
 
-    public static bool IsGameRunning()
+    public bool IsGameRunning()
     {
-        return gameProcess != null && !gameProcess.HasExited;
+        return process != null && !process.HasExited;
     }
 
-    public static float ReadFloat(int address)
+    public float ReadFloat(int address)
     {
         byte[] buffer = new byte[4];
-        ReadProcessMemory(gameProcess.Handle, (IntPtr)address, buffer, buffer.Length, out _);
+        ReadProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
         return BitConverter.ToSingle(buffer, 0);
     }
 
-    public static void WriteFloat(int address, float value)
+    public void WriteFloat(int address, float value)
     {
         byte[] buffer = BitConverter.GetBytes(value);
-        WriteProcessMemory(gameProcess.Handle, (IntPtr)address, buffer, buffer.Length, out _);
+        WriteProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
     }
 
-    public static int ReadInt(int address)
+    public int ReadInt(int address)
     {
         byte[] buffer = new byte[4];
-        ReadProcessMemory(gameProcess.Handle, (IntPtr)address, buffer, buffer.Length, out _);
+        ReadProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
         return BitConverter.ToInt32(buffer, 0);
     }
 
-    public static void WriteInt(int address, int value)
+    public void WriteInt(int address, int value)
     {
         byte[] buffer = BitConverter.GetBytes(value);
-        WriteProcessMemory(gameProcess.Handle, (IntPtr)address, buffer, buffer.Length, out _);
+        WriteProcessMemory(processHandle, (IntPtr)address, buffer, buffer.Length, out _);
     }
 
-    [DllImport("kernel32.dll")]
-    private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out int lpNumberOfBytesRead);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
-    [DllImport("kernel32.dll")]
-    private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out int lpNumberOfBytesWritten);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesWritten);
+
+    [Flags]
+    private enum ProcessAccessFlags : uint
+    {
+        All = 0x001F0FFF
+    }
 }
 ```
 
-This code provides a basic structure for a cheat trainer for a game like Left 4 Dead 2. The memory addresses are placeholders and need to be replaced with the actual addresses from the game. Ensure you understand the legal and ethical implications of using cheat trainers.
+**Note:** The provided address values are placeholders and should be replaced with the actual memory addresses relevant to the game. Additionally, please ensure you comply with all
