@@ -1,55 +1,50 @@
 ```markdown
 # CHANGELOG.md
 
-## [v2.4.1] - 2023-10-10
+## [v2.4.1] - 2023-10-01
 ### Added
-- Support for the latest Steam version of Left 4 Dead 2.
-- New feature: **Mod Loader** integration allowing users to easily apply and manage custom mods.
-- Added option to enable **God Mode** specifically for the "The Sacrifice" campaign.
+- Introduced a new "Infection Mode" cheat to transform gameplay with special zombie abilities.
+- Added support for faster loading of custom maps via the "Map Selector".
+  
+### Changed
+- Improved the user interface for the "Character Skin Changer" for easier navigation.
+- Updated the cheat engine to improve compatibility with the latest game patches.
 
 ### Fixed
-- Fixed a bug where the **Infinite Ammo** feature would not work in certain multiplayer modes.
-- Resolved compatibility issues with the **Director's AI** cheat causing unpredictable game crashes.
-- Minor UI fixes and adjustments for a smoother user experience.
+- Resolved an issue where "Unlimited Ammo" was not working in offline mode.
+- Fixed a bug causing crashes when using the "Super Speed" cheat in Versus mode.
+  
+## [v2.3.0] - 2023-05-15
+### Added
+- Implemented a new "Zombie Spawn Control" feature to manage the frequency of special infected appearances.
+- Added a "Sharing is Caring" feature allowing users to share their cheat configurations easily.
 
 ### Changed
-- Updated the user interface for easier navigation and quicker access to cheat features.
-- Improved documentation within the app for better guidance on using advanced features.
-
----
-
-## [v2.3.0] - 2023-06-15
-### Added
-- Introduced **No Reload** feature for all weapon types.
-- Support for enabling cheats during local co-op gameplay.
-- Added preset cheat profiles for popular campaigns like "Blood Harvest" and "Dark Carnival".
+- Restructured the "Settings" menu to improve accessibility of custom cheat options.
+- Enhanced performance of "Rapid Fire" cheats for a smoother experience.
 
 ### Fixed
-- Fixed the **Speed Hack** feature to prevent conflicts with anti-cheat systems.
-- Addressed issues preventing proper loading of custom campaigns when using cheat options.
+- Corrected a rare crash occurring when using the "God Mode" cheat during certain campaign scenes.
+- Fixed visual glitches in the "Wall Hack" feature when viewing from certain angles.
+
+## [v2.1.0] - 2023-02-22
+### Added
+- New "No Clip" functionality allowing players to pass through walls and obstacles seamlessly.
+- Added a "Check for Updates" feature to alert users about the latest cheat app releases.
 
 ### Changed
-- Updated the cheat activation hotkeys for better compatibility and user customization.
-- Revised the overall performance of the app, reducing memory usage and startup time.
-
----
-
-## [v2.1.0] - 2023-03-01
-### Added
-- New feature: **Zombie Spawn Control** allowing players to dictate specific types of infected to spawn during campaigns.
-- Enhanced the **Health Regeneration** feature with customizable rates and durations for different play styles.
+- Updated the "Custom Weapon Mod" settings layout for clearer categorization of available modifications.
+- Tweaked "Health Regeneration" values for a more balanced gameplay experience.
 
 ### Fixed
-- Resolved an issue where the **No Clip** cheat caused graphical artifacts in certain game maps.
-- Fixed reported crashes when using cheats while transitioning between different game modes.
+- Fixed inconsistencies in the "Infinite Gas Can" functionality, ensuring it works correctly across all game modes.
+- Addressed issues with the "One-Hit Kill" cheat not functioning properly on some boss enemies.
+
+## [v2.0.0] - 2023-01-10
+### Added
+- Initial release of the "Left 4 Dead 2 Cheat App" with basic features such as "Unlimited Health" and "No Reload".
+- Added functionality for character customization with a "Character Model Swap" feature.
 
 ### Changed
-- Improved the algorithm for detecting game updates, ensuring compatibility with new Left 4 Dead 2 patches.
-- Relaunched the app's icon and branding for a more modern look.
-
----
-
-## [v2.0.0] - 2022-12-20
-### Added
-- Initial release of Left 4 Dead 2 Cheat App with **Aim Assist** and **ESP** (Extrasensory Perception) features.
-- Basic **Weapon Modifications** including damage multipliers
+- Designed a new user interface focused on providing ease of use and quick access to features.
+- Optimized
