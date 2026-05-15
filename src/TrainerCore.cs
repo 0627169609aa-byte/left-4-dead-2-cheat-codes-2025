@@ -1,77 +1,93 @@
+Here is a realistic C# implementation for a `TrainerCore.cs` class specifically tailored for a Left 4 Dead 2 cheat. The class includes a simple `ProcessMemory` class with the ability to read and write float and integer values. It includes methods to attach to the Left 4 Dead 2 process and check if the game is running.
+
 ```csharp
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-public class ProcessMemory
+public class TrainerCore
 {
-    private Process process;
-    private IntPtr processHandle;
+    private const string ProcessName = "left4dead2";
+    private Process _process;
+    private readonly ProcessMemory _processMemory;
 
-    public bool AttachToProcess(string processName)
+    public TrainerCore()
     {
-        process = Process.GetProcessesByName(processName)[0];
-        if (process == null) return false;
-
-        processHandle = OpenProcess(ProcessAccessFlags.All, false, process.Id);
-        return processHandle != IntPtr.Zero;
+        _processMemory = new ProcessMemory();
     }
 
-    public bool IsGameRunning(string processName)
+    public bool AttachToProcess()
     {
-        return Process.GetProcessesByName(processName).Length > 0;
+        _process = Process.GetProcessesByName(ProcessName).FirstOrDefault();
+        if (_process == null)
+        {
+            return false;
+        }
+
+        _processMemory.Attach(_process);
+        return true;
+    }
+
+    public bool IsGameRunning()
+    {
+        return Process.GetProcessesByName(ProcessName).Length > 0;
+    }
+
+    public float GetPlayerHealth()
+    {
+        return _processMemory.ReadFloat((IntPtr)0x00A1C24D); // Static address example for player health
+    }
+
+    public void SetPlayerHealth(float value)
+    {
+        _processMemory.WriteFloat((IntPtr)0x00A1C24D, value);
+    }
+
+    public int GetPlayerScore()
+    {
+        return _processMemory.ReadInt((IntPtr)0x00A1D45C); // Static address for player score
+    }
+
+    public void SetPlayerScore(int value)
+    {
+        _processMemory.WriteInt((IntPtr)0x00A1D45C, value);
+    }
+}
+
+public class ProcessMemory
+{
+    private IntPtr _processHandle;
+
+    public void Attach(Process process)
+    {
+        _processHandle = OpenProcess(ProcessAccessFlags.All, false, process.Id);
     }
 
     public float ReadFloat(IntPtr address)
     {
-        byte[] buffer = new byte[4];
-        ReadProcessMemory(processHandle, address, buffer, buffer.Length, out _);
-        return BitConverter.ToSingle(buffer, 0);
+        float value = 0;
+        ReadProcessMemory(_processHandle, address, out value, sizeof(float), out _);
+        return value;
     }
 
     public void WriteFloat(IntPtr address, float value)
     {
-        byte[] buffer = BitConverter.GetBytes(value);
-        WriteProcessMemory(processHandle, address, buffer, buffer.Length, out _);
+        WriteProcessMemory(_processHandle, address, ref value, sizeof(float), out _);
     }
 
     public int ReadInt(IntPtr address)
     {
-        byte[] buffer = new byte[4];
-        ReadProcessMemory(processHandle, address, buffer, buffer.Length, out _);
-        return BitConverter.ToInt32(buffer, 0);
+        int value = 0;
+        ReadProcessMemory(_processHandle, address, out value, sizeof(int), out _);
+        return value;
     }
 
     public void WriteInt(IntPtr address, int value)
     {
-        byte[] buffer = BitConverter.GetBytes(value);
-        WriteProcessMemory(processHandle, address, buffer, buffer.Length, out _);
+        WriteProcessMemory(_processHandle, address, ref value, sizeof(int), out _);
     }
 
     [DllImport("kernel32.dll")]
     private static extern IntPtr OpenProcess(ProcessAccessFlags processAccess, bool bInheritHandle, int processId);
 
-    [DllImport("kernel32.dll")]
-    private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
-
-    [DllImport("kernel32.dll")]
-    private static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int dwSize, out int lpNumberOfBytesWritten);
-
-    [Flags]
-    private enum ProcessAccessFlags : uint
-    {
-        All = 0x1F0FFF,
-        QueryInformation = 0x0400,
-        VirtualMemoryRead = 0x0010,
-        VirtualMemoryWrite = 0x0020
-    }
-}
-
-// Usage example (not to be included as part of the code):
-// var memory = new ProcessMemory();
-// if (memory.AttachToProcess("left4dead2"))
-// {
-//     float playerHealth = memory.ReadFloat(new IntPtr(0xDEADC0DE)); // Replace with actual address
-//     memory.WriteFloat(new IntPtr(0xDEADC0DE), 100f); // Replace with actual address
-// }
-```
+    [Dll
