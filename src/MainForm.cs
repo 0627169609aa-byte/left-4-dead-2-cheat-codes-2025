@@ -3,94 +3,80 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
 
-namespace Left4Dead2CheatApp
+namespace L4D2CheatApp
 {
     public partial class MainForm : Form
     {
         private const string GameProcessName = "left4dead2";
-        private const int RefreshInterval = 1000; // 1 second
-
-        private Timer processCheckTimer;
-        private Process gameProcess;
+        private Timer processDetectTimer;
+        private bool isGameRunning = false;
 
         public MainForm()
         {
             InitializeComponent();
-            InitializeAdditionalComponents();
-        }
-
-        private void InitializeAdditionalComponents()
-        {
-            processCheckTimer = new Timer();
-            processCheckTimer.Interval = RefreshInterval;
-            processCheckTimer.Tick += ProcessCheckTimer_Tick;
-            processCheckTimer.Start();
-        }
-
-        private void ProcessCheckTimer_Tick(object sender, EventArgs e)
-        {
-            gameProcess = Process.GetProcessesByName(GameProcessName).FirstOrDefault();
-            if (gameProcess != null)
-            {
-                lblStatus.Text = "Game Running";
-                btnActivateCheat.Enabled = true;
-            }
-            else
-            {
-                lblStatus.Text = "Game Not Running";
-                btnActivateCheat.Enabled = false;
-            }
-        }
-
-        private void btnActivateCheat_Click(object sender, EventArgs e)
-        {
-            if (gameProcess != null)
-            {
-                // Insert cheat activation code here
-                MessageBox.Show("Cheat Activated!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Game must be running to activate cheats.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            processCheckTimer.Stop();
-            processCheckTimer.Dispose();
+            InitializeTimer();
         }
 
         private void InitializeComponent()
         {
-            this.lblStatus = new Label();
-            this.btnActivateCheat = new Button();
-            this.SuspendLayout();
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(12, 9);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(0, 13);
-            this.lblStatus.TabIndex = 0;
-            // 
-            // btnActivateCheat
-            // 
-            this.btnActivateCheat.Location = new System.Drawing.Point(12, 35);
-            this.btnActivateCheat.Name = "btnActivateCheat";
-            this.btnActivateCheat.Size = new System.Drawing.Size(120, 23);
-            this.btnActivateCheat.TabIndex = 1;
-            this.btnActivateCheat.Text = "Activate Cheat";
-            this.btnActivateCheat.UseVisualStyleBackColor = true;
-            this.btnActivateCheat.Click += new EventHandler(this.btnActivateCheat_Click);
-            // 
-            // MainForm
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 61);
-            this.Controls.Add(this.btnActivateCheat);
-            this.Controls.Add(this.lblStatus);
-            this.Name = "MainForm";
+            this.Text = "Left 4 Dead 2 Cheat";
+            this.Size = new System.Drawing.Size(300, 200);
+            
+            Button activateCheatButton = new Button();
+            activateCheatButton.Text = "Activate Cheat";
+            activateCheatButton.Location = new System.Drawing.Point(50, 50);
+            activateCheatButton.Click += ActivateCheatButton_Click;
+
+            Button deactivateCheatButton = new Button();
+            deactivateCheatButton.Text = "Deactivate Cheat";
+            deactivateCheatButton.Location = new System.Drawing.Point(150, 50);
+            deactivateCheatButton.Click += DeactivateCheatButton_Click;
+
+            this.Controls.Add(activateCheatButton);
+            this.Controls.Add(deactivateCheatButton);
+        }
+
+        private void InitializeTimer()
+        {
+            processDetectTimer = new Timer();
+            processDetectTimer.Interval = 1000; // Check every second
+            processDetectTimer.Tick += ProcessDetectTimer_Tick;
+            processDetectTimer.Start();
+        }
+
+        private void ProcessDetectTimer_Tick(object sender, EventArgs e)
+        {
+            isGameRunning = Process.GetProcessesByName(GameProcessName).Any();
+            this.Text = isGameRunning ? "Game Running" : "Left 4 Dead 2 Cheat";
+        }
+
+        private void ActivateCheatButton_Click(object sender, EventArgs e)
+        {
+            if (isGameRunning)
+            {
+                // Code to activate the cheat
+                MessageBox.Show("Cheat Activated!");
+            }
+            else
+            {
+                MessageBox.Show("Game not running. Please start Left 4 Dead 2.");
+            }
+        }
+
+        private void DeactivateCheatButton_Click(object sender, EventArgs e)
+        {
+            if (isGameRunning)
+            {
+                // Code to deactivate the cheat
+                MessageBox.Show("Cheat Deactivated!");
+            }
+            else
+            {
+                MessageBox.Show("Game not running. Please start Left 4 Dead 2.");
+            }
+        }
+    }
+}
+```
