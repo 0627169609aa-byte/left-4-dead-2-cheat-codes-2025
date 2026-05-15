@@ -1,56 +1,46 @@
 ```markdown
-# CHANGELOG.md
+# CHANGELOG
 
-## [v2.4.1] - 2023-10-15
+## [v2.4.1] - 2023-10-05
 ### Added
-- New **Infected Aimbot** feature for more precise targeting of special infected.
-- **Item Spawn Selector** interface improvements, now allows filtering by item type (weapons, health kits, etc.).
-
+- **Scripted Spawns**: Enhanced the 'Scripted Spawns' feature for more control over zombie spawn mechanics.
+- **Survivor Customization**: Added new customization options for survivor appearances and weapons.
+  
 ### Changed
-- Enhanced **No Clip** functionality for better navigation through complex maps.
-- Improved performance of the **Speed Hack** feature, reducing in-game lag and increasing responsiveness.
+- **In-game HUD**: Updated the user interface for in-game overlays to improve visibility and usability during gameplay.
+- **Weapon Loadouts**: Improved loadout management system, allowing saving multiple configurations for easier access.
 
 ### Fixed
-- Resolved a bug where **God Mode** would deactivate unexpectedly during multiplayer sessions.
-- Fixed an issue with displaying **SV_Touch** commands, ensuring all commands are clearly visible in the console.
+- Resolved an issue causing the app to crash when refreshing the mod list.
+- Fixed a bug preventing the activation of 'Infinite Ammo' while using certain weapon mods.
 
----
-
-## [v2.3.0] - 2023-08-07
+## [v2.3.0] - 2023-08-12
 ### Added
-- Introduced **Custom Zombies** feature allowing players to load models for infected.
-- Added **Cheat Toggle Hotkeys** for instant enable/disable of most features.
+- **Mutation Modes**: Introduced support for selecting and switching between various mutation modes.
+- **Dedicated Server Settings**: Added options for adjusting settings on dedicated servers directly through the app.
 
 ### Changed
-- Updated the engine compatibility checks to support the latest game updates.
-- Refined the **Auto-Respawn** feature to work seamlessly with dedicated servers.
+- **Performance Optimization**: Increased overall app performance with reduced load times and improved stability.
+- **Reload Mechanics**: Tweaked the 'Reload Speed' feature to make it more adjustable based on different scenarios.
 
 ### Fixed
-- Fixed a crash that occurred when using the **Weapon Spawner** feature on certain maps.
-- Addressed issues with the **Wallhack** that caused it to not function properly in high-stress environments.
+- Addressed issues related to the 'God Mode' toggle that sometimes would not engage.
+- Fixed GUI glitches that appeared when running the app in fullscreen mode.
 
----
-
-## [v2.1.0] - 2023-05-12
+## [v2.1.0] - 2023-05-22
 ### Added
-- New **Zombie Prediction** feature that helps players to avoid unexpected attacks.
-- Implemented **Visual Customizations** to change HUD elements while cheats are active.
+- **Cheat Commands**: Expanded the list of available cheat commands, including `give` and `sv_cheats`.
+- **Map Editor Compatibility**: Added features to assist with custom map editing within the app.
 
 ### Changed
-- Improved **Aim Assist** accuracy, especially against fast-moving targets like Smoker and Hunter.
-- Modified the **Max Health** cheat to now include a gradual health regeneration option.
+- **User Guide**: Updated the user guide with step-by-step instructions for new features introduced.
+- **Settings Reset**: Improved the process for resetting user settings to avoid data loss.
 
 ### Fixed
-- Fixed a rare instance where the **Model Spoofing** feature would cause client-side crashes.
-- Resolved an issue in the *console command* interface where commands were not being recognized.
+- Fixed an issue with the app not recognizing mod directories correctly after an update.
+- Resolved a bug that prevented certain cheat codes from being executed on multiplayer servers.
 
----
-
-## [v2.0.0] - 2023-02-20
+## [v2.0.0] - 2023-03-10
 ### Added
-- Initial release of the application with basic functionality including **God Mode**, **Infinite Ammo**, and **No Clip**.
-- Integrated console for executing commands directly within the game.
-
-### Changed
-- User interface overhaul for easier navigation and accessibility to features.
-- Updated documentation to provide clearer instructions on
+- **Revamped UI**: Major overhaul of the application's user interface for a more immersive experience.
+- **New Cheat Options**: Introduced several new cheat options, including 'No Clip' and '
